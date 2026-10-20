@@ -1,0 +1,40 @@
+const {Model,DataTypes}=require('sequelize');
+const {sequelize}=require('../connection.js');
+class Comment extends Model{}
+Comment.init(
+    {
+        id:{
+            type:DataTypes.INTEGER,
+            autoIncrement:true,
+            primaryKey:true
+        },
+        content:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        postId:{
+            type:DataTypes.INTEGER,
+            references:{
+                model:'Posts',
+                key:'id'
+            }
+        },
+        userId:{
+            type:DataTypes.INTEGER,
+            references:{
+                model:'Users',
+                key:'id'
+            }
+        },
+        createdAt:{
+            type:DataTypes.DATE
+        },
+        updatedAt:{
+            type:DataTypes.DATE
+        }
+    },{
+        sequelize,
+        modelName:'Comment'
+    }
+)
+module.exports=Comment;

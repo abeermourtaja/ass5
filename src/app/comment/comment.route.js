@@ -1,0 +1,10 @@
+const express=require('express')
+const router=express.Router()
+const commentController=require('./comment.controller.js')
+router.post('/comments',commentController.createCommentController)
+router.put('/comments/:id',commentController.updateCommentController)
+router.get('/comments/find-or-create',commentController.getCommentsByPostIdController)
+router.get('/comments/search',commentController.getCommentsBySearchController)
+router.get('/comments/newest/:postId',commentController.getRecentCommentsController)
+router.get('/comments/details/:id',commentController.getCommentDetailsController)
+module.exports=router;

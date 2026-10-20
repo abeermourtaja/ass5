@@ -1,0 +1,39 @@
+const {Model,DataTypes}=require('sequelize')
+const {sequelize}=require('../connection.js')
+class Post extends Model{}
+Post.init(
+    {
+        id:{
+            type:DataTypes.INTEGER,
+            autoIncrement:true,
+            primaryKey:true
+        },
+        title:{
+            type:DataTypes.TEXT,
+            allowNull:false
+        },
+        content:{
+            type:DataTypes.TEXT,
+            allowNull:false
+        },
+        userId:{
+            type:DataTypes.INTEGER,
+            allowNull:false,
+            references:{
+                model:'Users',
+                key:'id'
+            }
+        },
+        createdAt:{
+            type:DataTypes.DATE,
+        },
+        updatedAt:{
+            type:DataTypes.DATE
+        }
+    },{
+        sequelize,
+        modelName:'Post',
+        paranoid:true
+    }
+)
+module.exports=Post
